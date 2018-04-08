@@ -1,0 +1,76 @@
+package test;
+
+public class funkifier {
+	public static void main(String[] args) {
+		System.out.println(funky("unicorn"));
+		System.out.println(funky2("unicorn"));
+		System.out.println(funky3("unicorn"));
+		System.out.println(mixer("cat", "dog"));
+		System.out.println(mixer2("cat", "pineapple"));
+	}
+
+	static String funky(String s) {
+		String output = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (i % 2 == 0) {
+				output += Character.toUpperCase(s.charAt(i));
+			} else {
+				output += Character.toLowerCase(s.charAt(i));
+			}
+		}
+		return output;
+	}
+
+	static String funky2(String s) {
+		s = Character.toUpperCase(s.charAt(0)) + s.substring(1, s.length());
+		for (int i = 1; i < s.length(); i++) {
+			if (i % 2 == 0) {
+				s = s.substring(0, i) + Character.toUpperCase(s.charAt(i)) + s.substring(i + 1, s.length());
+			} else {
+				s = s.substring(0, i) + Character.toLowerCase(s.charAt(i)) + s.substring(i + 1, s.length());
+			}
+		}
+		return s;
+	}
+
+	static String funky3(String s) {
+		if (s.length() == 1) {
+			return s.toUpperCase();
+		} else if (s.length() % 2 == 1) {
+			return "" + funky3(s.substring(0, s.length() - 1)) + Character.toUpperCase(s.charAt(s.length() - 1));
+			
+		} else {
+			return "" + funky3(s.substring(0, s.length() - 1)) + Character.toLowerCase(s.charAt(s.length() - 1));
+			
+		}
+	}
+	
+	static String mixer(String a, String b) {
+		String output = "";
+		for(int i=0; i<a.length();i++) {
+			output += a.charAt(i) +""+ b.charAt(i);
+		}
+		return output;
+	}
+	
+	static String mixer2(String a, String b) {
+		String output = "";
+		int aLen = a.length();
+		int bLen = b.length();
+		if(aLen < bLen) {
+			String temp = a;
+			a = b;
+			b = temp;
+			aLen = a.length();
+			bLen = b.length();
+		}
+		for(int i = 0; i<aLen; i++) {
+			output+=Character.toLowerCase(a.charAt(i));
+			if(i<bLen) {
+				output+=Character.toUpperCase(b.charAt(i));
+			}
+		}
+		return output;
+	}
+
+}
